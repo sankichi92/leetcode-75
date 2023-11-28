@@ -1,9 +1,6 @@
-fn main() {
-    let result = merge_alternately(String::from("abc"), String::from("pqr"));
-    println!("{result}");
-}
+fn main() {}
 
-fn merge_alternately(word1: String, word2: String) -> String {
+pub fn merge_alternately(word1: String, word2: String) -> String {
     let mut result = String::new();
 
     for (c1, c2) in word1.chars().into_iter().zip(word2.chars().into_iter()) {
@@ -28,7 +25,7 @@ fn merge_alternately(word1: String, word2: String) -> String {
 
 #[cfg(test)]
 mod tests {
-    use super::merge_alternately;
+    use super::*;
 
     #[test]
     fn case1() {
