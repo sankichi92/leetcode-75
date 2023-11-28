@@ -1,9 +1,13 @@
 fn main() {}
 
 pub fn can_place_flowers(flowerbed: Vec<i32>, n: i32) -> bool {
-    let mut capacity = 0;
+    if n == 0 {
+        return true;
+    }
 
+    let mut capacity = 0;
     let mut previous = 0;
+
     for (i, current) in flowerbed.iter().enumerate() {
         let next = flowerbed.get(i + 1).unwrap_or(&0);
 
