@@ -8,15 +8,17 @@ pub fn increasing_triplet(nums: Vec<i32>) -> bool {
         if let Some(second) = second_candidate {
             if *num > second {
                 return true;
-            } else {
+            } else if *num > first_candidate {
                 second_candidate = Some(*num);
+            } else {
+                first_candidate = *num;
             }
         }
 
         if *num > first_candidate {
             second_candidate = Some(*num);
         } else {
-            first_candidate = *num
+            first_candidate = *num;
         }
     }
 
@@ -40,5 +42,10 @@ mod tests {
     #[test]
     fn case3() {
         assert_eq!(increasing_triplet(vec![2, 1, 5, 0, 4, 6]), true);
+    }
+
+    #[test]
+    fn case4() {
+        assert_eq!(increasing_triplet(vec![6, 7, 1, 2]), false);
     }
 }
