@@ -1,19 +1,22 @@
 fn main() {}
 
 pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
-    let mut results = Vec::with_capacity(nums.len());
+    let product_all: i32 = nums.iter().product();
 
-    for i in 0..nums.len() {
-        let product = nums
-            .iter()
-            .enumerate()
-            .filter(|&(j, _)| j != i)
-            .map(|(_, num)| num)
-            .product();
-        results.push(product);
-    }
-
-    results
+    nums.iter()
+        .enumerate()
+        .map(|(i, num)| {
+            if *num == 0 {
+                nums.iter()
+                    .enumerate()
+                    .filter(|&(j, _)| j != i)
+                    .map(|(_, num)| num)
+                    .product()
+            } else {
+                product_all / num
+            }
+        })
+        .collect()
 }
 
 #[cfg(test)]
