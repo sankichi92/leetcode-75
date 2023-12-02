@@ -4,8 +4,10 @@ pub fn max_area(height: Vec<i32>) -> i32 {
     let mut max_area = 0;
 
     for (i, val1) in height.iter().enumerate() {
-        for (j, val2) in height.iter().skip(i + 1).enumerate() {
-            let area = val1.min(val2) * (j as i32 + 1);
+        let min_len = max_area / val1;
+
+        for (j, val2) in height.iter().skip(i + 1 + min_len as usize).enumerate() {
+            let area = val1.min(val2) * (min_len + j as i32 + 1);
             if area > max_area {
                 max_area = area;
             }
