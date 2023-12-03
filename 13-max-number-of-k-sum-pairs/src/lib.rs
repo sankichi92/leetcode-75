@@ -1,20 +1,22 @@
 pub fn max_operations(nums: Vec<i32>, k: i32) -> i32 {
-    let mut nums = nums.clone();
     let mut count = 0;
 
-    for i in 0..nums.len() {
-        if let Some(current) = nums.get(i) {
-            if let Some((j, _)) = nums
-                .iter()
-                .skip(i + 1)
-                .enumerate()
-                .find(|(_, &num)| num == k - current)
-            {
-                nums.remove(i + 1 + j);
+    let mut nums = nums.clone();
+    nums.sort();
+
+    let mut left = 0;
+    let mut right = nums.len() - 1;
+
+    while left < right {
+        let sum = nums[left] + nums[right];
+        match sum {
+            _ if sum < k => left += 1,
+            _ if sum > k => right -= 1,
+            _ => {
                 count += 1;
+                left += 1;
+                right -= 1;
             }
-        } else {
-            break;
         }
     }
 
