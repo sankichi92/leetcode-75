@@ -1,7 +1,7 @@
 pub fn merge_alternately(word1: String, word2: String) -> String {
     let mut result = String::new();
 
-    for (c1, c2) in word1.chars().into_iter().zip(word2.chars().into_iter()) {
+    for (c1, c2) in word1.chars().zip(word2.chars()) {
         result.push(c1);
         result.push(c2);
     }

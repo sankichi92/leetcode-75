@@ -30,12 +30,12 @@ mod tests {
     #[test]
     fn case1() {
         let result = can_place_flowers(vec![1, 0, 0, 0, 1], 1);
-        assert_eq!(result, true);
+        assert!(result);
     }
 
     #[test]
     fn case2() {
         let result = can_place_flowers(vec![1, 0, 0, 0, 1], 2);
-        assert_eq!(result, false);
+        assert!(!result);
     }
 }

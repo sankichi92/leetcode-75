@@ -29,21 +29,21 @@ mod tests {
 
     #[test]
     fn case1() {
-        assert_eq!(increasing_triplet(vec![1, 2, 3, 4, 5]), true);
+        assert!(increasing_triplet(vec![1, 2, 3, 4, 5]));
     }
 
     #[test]
     fn case2() {
-        assert_eq!(increasing_triplet(vec![5, 4, 3, 2, 1]), false);
+        assert!(!increasing_triplet(vec![5, 4, 3, 2, 1]));
     }
 
     #[test]
     fn case3() {
-        assert_eq!(increasing_triplet(vec![2, 1, 5, 0, 4, 6]), true);
+        assert!(increasing_triplet(vec![2, 1, 5, 0, 4, 6]));
     }
 
     #[test]
     fn case4() {
-        assert_eq!(increasing_triplet(vec![6, 7, 1, 2]), false);
+        assert!(!increasing_triplet(vec![6, 7, 1, 2]));
     }
 }

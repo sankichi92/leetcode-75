@@ -1,3 +1,5 @@
+use std::fmt;
+
 pub fn compress(chars: &mut Vec<char>) -> i32 {
     let mut current_group = CharGroup::new(chars[0]);
     let mut results = String::new();
@@ -25,18 +27,20 @@ struct CharGroup {
 
 impl CharGroup {
     fn new(char: char) -> Self {
-        return CharGroup { char, count: 1 };
+        CharGroup { char, count: 1 }
     }
 
     fn incr(&mut self) {
         self.count += 1;
     }
+}
 
-    fn to_string(&self) -> String {
+impl fmt::Display for CharGroup {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         if self.count > 1 {
-            format!("{}{}", self.char, self.count)
+            write!(f, "{}{}", self.char, self.count)
         } else {
-            self.char.to_string()
+            write!(f, "{}", self.char)
         }
     }
 }
