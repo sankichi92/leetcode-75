@@ -13,4 +13,5 @@ members = [
   "10-move-zeroes",
   "11-is-subsequence",
   "12-container-with-most-water",
+  "13-max-number-of-k-sum-pairs",
 ]
