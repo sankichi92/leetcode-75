@@ -8,11 +8,13 @@ pub fn reverse_vowels(s: String) -> String {
 
     let mut results = String::with_capacity(s.len());
     for c in s.chars() {
-        results.push(if ['a', 'e', 'i', 'o', 'u'].contains(&c.to_ascii_lowercase()) {
-            vowels.pop().unwrap()
-        } else {
-            c
-        });
+        results.push(
+            if ['a', 'e', 'i', 'o', 'u'].contains(&c.to_ascii_lowercase()) {
+                vowels.pop().unwrap()
+            } else {
+                c
+            },
+        );
     }
 
     results

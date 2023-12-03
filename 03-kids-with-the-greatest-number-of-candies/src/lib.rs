@@ -1,6 +1,6 @@
 pub fn kids_with_candies(candies: Vec<i32>, extra_candies: i32) -> Vec<bool> {
     let mut results = Vec::with_capacity(candies.len());
-    
+
     let max_candies = *candies.iter().max().unwrap();
 
     for candy in candies.iter() {

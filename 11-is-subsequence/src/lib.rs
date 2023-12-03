@@ -1,6 +1,6 @@
 pub fn is_subsequence(s: String, t: String) -> bool {
     let mut s: Vec<_> = s.chars().rev().collect();
-    
+
     let mut current;
     if let Some(first) = s.pop() {
         current = first
