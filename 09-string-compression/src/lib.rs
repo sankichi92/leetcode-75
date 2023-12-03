@@ -1,5 +1,3 @@
-fn main() {}
-
 pub fn compress(chars: &mut Vec<char>) -> i32 {
     let mut current_group = CharGroup::new(chars[0]);
     let mut results = String::new();

@@ -1,5 +1,3 @@
-fn main() {}
-
 pub fn product_except_self(nums: Vec<i32>) -> Vec<i32> {
     let product_all: i32 = nums.iter().product();
 

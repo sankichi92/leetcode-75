@@ -1,5 +1,3 @@
-fn main() {}
-
 pub fn reverse_vowels(s: String) -> String {
     let mut vowels = Vec::new();
     for c in s.chars() {

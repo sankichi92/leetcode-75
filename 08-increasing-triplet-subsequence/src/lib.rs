@@ -1,5 +1,3 @@
-fn main() {}
-
 pub fn increasing_triplet(nums: Vec<i32>) -> bool {
     let mut first_candidate = nums[0];
     let mut second_candidate = None;

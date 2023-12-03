@@ -1,5 +1,3 @@
-fn main() {}
-
 pub fn move_zeroes(nums: &mut Vec<i32>) {
     let mut current = 0;
     for num in nums.clone() {

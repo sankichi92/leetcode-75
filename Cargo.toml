@@ -1,0 +1,16 @@
+[workspace]
+resolver = "2"
+members = [
+  "01-merge-strings-alternately",
+  "02-greatest-common-divisor-of-strings",
+  "03-kids-with-the-greatest-number-of-candies",
+  "04-can-place-flowers",
+  "05-reverse-vowels-of-a-string",
+  "06-reverse-words-in-a-string",
+  "07-product-of-array-except-self",
+  "08-increasing-triplet-subsequence",
+  "09-string-compression",
+  "10-move-zeroes",
+  "11-is-subsequence",
+  "12-container-with-most-water",
+]

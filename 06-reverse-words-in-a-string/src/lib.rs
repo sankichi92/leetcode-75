@@ -1,5 +1,3 @@
-fn main() {}
-
 pub fn reverse_words(s: String) -> String {
     let reversed: Vec<_> = s.split_ascii_whitespace().rev().collect();
     reversed.join(" ")
