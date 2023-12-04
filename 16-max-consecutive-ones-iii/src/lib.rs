@@ -1,16 +1,18 @@
+use std::collections::VecDeque;
+
 pub fn longest_ones(nums: Vec<i32>, k: i32) -> i32 {
     let mut max = 0;
-    let mut current = Vec::new();
+    let mut current = VecDeque::new();
     let mut zero_count = 0;
 
     for num in nums {
-        current.push(num);
+        current.push_back(num);
 
         if num == 0 {
             if zero_count < k {
                 zero_count += 1;
             } else {
-                while !current.is_empty() && current.remove(0) == 1 {}
+                while let Some(1) = current.pop_front() {}
             }
         }
 
