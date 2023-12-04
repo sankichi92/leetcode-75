@@ -1,7 +1,7 @@
 use std::collections::VecDeque;
 
 pub fn longest_ones(nums: Vec<i32>, k: i32) -> i32 {
-    let mut max = 0;
+    let mut longest = 0;
     let mut current = VecDeque::new();
     let mut zero_count = 0;
 
@@ -16,12 +16,10 @@ pub fn longest_ones(nums: Vec<i32>, k: i32) -> i32 {
             }
         }
 
-        if current.len() > max {
-            max = current.len();
-        }
+        longest = longest.max(current.len());
     }
 
-    max as i32
+    longest as i32
 }
 
 #[cfg(test)]
