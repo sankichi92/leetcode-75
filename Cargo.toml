@@ -15,4 +15,5 @@ members = [
   "12-container-with-most-water",
   "13-max-number-of-k-sum-pairs",
   "14-maximum-average-subarray-i",
+  "15-maximum-number-of-vowels-in-a-substring-of-given-length",
 ]
