@@ -1,50 +1,25 @@
 pub fn longest_ones(nums: Vec<i32>, k: i32) -> i32 {
-    let mut max_len = 0;
-    let mut len = 0;
-
-    if k == 0 {
-        for num in nums {
-            if num == 0 {
-                len = 0;
-            } else {
-                len += 1;
-                if len > max_len {
-                    max_len = len;
-                }
-            }
-        }
-        return max_len;
-    }
-
+    let mut max = 0;
+    let mut current = Vec::new();
     let mut zero_count = 0;
-    let mut next_index = 0;
 
-    'root: loop {
-        for (i, &num) in nums.iter().enumerate().skip(next_index) {
-            if num == 0 {
+    for num in nums {
+        current.push(num);
+
+        if num == 0 {
+            if zero_count < k {
                 zero_count += 1;
-                if zero_count == 1 {
-                    next_index = i + 1;
-                }
-                if zero_count > k {
-                    zero_count = 0;
-                    len = 0;
-                    break;
-                }
+            } else {
+                while !current.is_empty() && current.remove(0) == 1 {}
             }
+        }
 
-            len += 1;
-            if len > max_len {
-                max_len = len;
-            }
-
-            if i == nums.len() - 1 {
-                break 'root;
-            }
+        if current.len() > max {
+            max = current.len();
         }
     }
 
-    max_len
+    max as i32
 }
 
 #[cfg(test)]
