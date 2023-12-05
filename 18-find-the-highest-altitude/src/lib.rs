@@ -1,13 +1,12 @@
 pub fn largest_altitude(gain: Vec<i32>) -> i32 {
-    let mut highest = 0;
-    let mut altitude = 0;
-
-    for net in gain {
-        altitude += net;
-        highest = highest.max(altitude);
-    }
-
-    highest
+    gain.iter()
+        .scan(0, |altitude, net| {
+            *altitude += net;
+            Some(*altitude)
+        })
+        .max()
+        .unwrap()
+        .max(0)
 }
 
 #[cfg(test)]
