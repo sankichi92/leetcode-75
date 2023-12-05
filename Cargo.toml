@@ -17,4 +17,5 @@ members = [
   "14-maximum-average-subarray-i",
   "15-maximum-number-of-vowels-in-a-substring-of-given-length",
   "16-max-consecutive-ones-iii",
+  "17-longest-subarray-of-1s-after-deleting-one-element",
 ]
