@@ -19,4 +19,5 @@ members = [
   "16-max-consecutive-ones-iii",
   "17-longest-subarray-of-1s-after-deleting-one-element",
   "18-find-the-highest-altitude",
+  "19-find-pivot-index",
 ]
