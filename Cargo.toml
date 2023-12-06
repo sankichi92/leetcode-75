@@ -21,4 +21,5 @@ members = [
   "18-find-the-highest-altitude",
   "19-find-pivot-index",
   "20-find-the-difference-of-two-arrays",
+  "21-unique-number-of-occurrences",
 ]
