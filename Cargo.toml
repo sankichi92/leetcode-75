@@ -20,4 +20,5 @@ members = [
   "17-longest-subarray-of-1s-after-deleting-one-element",
   "18-find-the-highest-altitude",
   "19-find-pivot-index",
+  "20-find-the-difference-of-two-arrays",
 ]
