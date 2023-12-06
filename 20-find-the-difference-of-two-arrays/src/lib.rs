@@ -1,12 +1,19 @@
 use std::collections::HashSet;
 
 pub fn find_difference(nums1: Vec<i32>, nums2: Vec<i32>) -> Vec<Vec<i32>> {
-    let nums1: HashSet<i32> = HashSet::from_iter(nums1);
-    let nums2: HashSet<i32> = HashSet::from_iter(nums2);
+    let mut set1 = HashSet::new();
+    for num in nums1 {
+        set1.insert(num);
+    }
+
+    let mut set2 = HashSet::new();
+    for num in nums2 {
+        set2.insert(num);
+    }
 
     vec![
-        nums1.difference(&nums2).copied().collect(),
-        nums2.difference(&nums1).copied().collect(),
+        set1.difference(&set2).copied().collect(),
+        set2.difference(&set1).copied().collect(),
     ]
 }
 
