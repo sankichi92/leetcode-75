@@ -22,4 +22,5 @@ members = [
   "19-find-pivot-index",
   "20-find-the-difference-of-two-arrays",
   "21-unique-number-of-occurrences",
+  "22-determine-if-two-strings-are-close",
 ]
