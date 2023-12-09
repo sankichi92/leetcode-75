@@ -1,28 +1,29 @@
 pub fn asteroid_collision(asteroids: Vec<i32>) -> Vec<i32> {
-    asteroids
-        .iter()
-        .skip(1)
-        .fold(Vec::from([asteroids[0]]), |mut results, asteroid| {
-            if *asteroid < 0 {
-                while let Some(previous) = results.pop() {
-                    match previous {
-                        size if size > 0 && size > asteroid.abs() => {
-                            results.push(previous);
-                            break;
-                        }
-                        size if size > 0 && size == asteroid.abs() => break,
-                        size if size < 0 => {
-                            results.extend([previous, *asteroid]);
-                            break;
-                        }
-                        _ => (),
+    asteroids.iter().fold(Vec::new(), |mut results, asteroid| {
+        if *asteroid < 0 {
+            loop {
+                match results.pop() {
+                    Some(previous) if previous > 0 && previous > asteroid.abs() => {
+                        results.push(previous);
+                        break;
+                    }
+                    Some(previous) if previous > 0 && previous == asteroid.abs() => break,
+                    Some(previous) if previous < 0 => {
+                        results.extend([previous, *asteroid]);
+                        break;
+                    }
+                    Some(_) => (),
+                    None => {
+                        results.push(*asteroid);
+                        break;
                     }
                 }
-            } else {
-                results.push(*asteroid);
             }
-            results
-        })
+        } else {
+            results.push(*asteroid);
+        }
+        results
+    })
 }
 
 #[cfg(test)]
@@ -47,5 +48,10 @@ mod tests {
     #[test]
     fn failed_case1() {
         assert_eq!(asteroid_collision(vec![-2, -1, 1, 2]), vec![-2, -1, 1, 2])
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(asteroid_collision(vec![1, -2, -2, -2]), vec![-2, -2, -2])
     }
 }
