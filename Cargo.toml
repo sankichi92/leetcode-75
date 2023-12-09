@@ -25,4 +25,5 @@ members = [
   "22-determine-if-two-strings-are-close",
   "23-equal-row-and-column-pairs",
   "24-removing-stars-from-a-string",
+  "25-asteroid-collision",
 ]
