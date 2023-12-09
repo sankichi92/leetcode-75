@@ -27,4 +27,5 @@ members = [
   "24-removing-stars-from-a-string",
   "25-asteroid-collision",
   "26-decode-string",
+  "27-number-of-recent-calls",
 ]
