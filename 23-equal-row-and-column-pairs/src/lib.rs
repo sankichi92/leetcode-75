@@ -3,14 +3,14 @@ use std::collections::HashMap;
 pub fn equal_pairs(grid: Vec<Vec<i32>>) -> i32 {
     let size = grid.len();
 
-    let mut nums_to_count = grid
-        .clone()
-        .into_iter()
-        .fold(HashMap::with_capacity(size), |mut map, row| {
-            let (r, _) = map.entry(row).or_insert((0, 0));
-            *r += 1;
-            map
-        });
+    let mut nums_to_count =
+        grid.clone()
+            .into_iter()
+            .fold(HashMap::with_capacity(size), |mut map, row| {
+                let (r, _) = map.entry(row).or_insert((0, 0));
+                *r += 1;
+                map
+            });
 
     for i in 0..size {
         let col: Vec<_> = grid.iter().map(|row| row[i]).collect();
