@@ -1,11 +1,13 @@
 pub struct RecentCounter {
-    requests: Vec<i32>
+    requests: Vec<i32>,
 }
 
 impl RecentCounter {
     #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
-        RecentCounter { requests: Vec::new() }
+        RecentCounter {
+            requests: Vec::new(),
+        }
     }
 
     pub fn ping(&mut self, t: i32) -> i32 {
@@ -19,7 +21,7 @@ impl RecentCounter {
         }
 
         self.requests.push(t);
-        
+
         count
     }
 }
