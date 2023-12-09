@@ -21,8 +21,12 @@ pub fn close_strings(word1: String, word2: String) -> bool {
         return false;
     }
 
-    if char_count1.values().collect::<HashSet<_>>() != char_count2.values().collect::<HashSet<_>>()
-    {
+    let mut char_count1: Vec<_> = char_count1.values().collect();
+    let mut char_count2: Vec<_> = char_count2.values().collect();
+    char_count1.sort();
+    char_count2.sort();
+
+    if char_count1 != char_count2 {
         return false;
     }
 
@@ -51,5 +55,13 @@ mod tests {
     #[test]
     fn failed_case1() {
         assert!(!close_strings("abbzzca".to_string(), "babzzcz".to_string()));
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert!(!close_strings(
+            "aaabbbbccddeeeeefffff".to_string(),
+            "aaaaabbcccdddeeeeffff".to_string()
+        ));
     }
 }
