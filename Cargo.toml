@@ -28,4 +28,5 @@ members = [
   "25-asteroid-collision",
   "26-decode-string",
   "27-number-of-recent-calls",
+  "28-dota2-senate",
 ]
