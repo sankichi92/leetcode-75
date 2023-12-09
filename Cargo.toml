@@ -23,4 +23,5 @@ members = [
   "20-find-the-difference-of-two-arrays",
   "21-unique-number-of-occurrences",
   "22-determine-if-two-strings-are-close",
+  "23-equal-row-and-column-pairs",
 ]
