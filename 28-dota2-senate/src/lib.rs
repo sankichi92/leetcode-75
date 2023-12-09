@@ -1,7 +1,5 @@
-use std::collections::VecDeque;
-
 pub fn predict_party_victory(senate: String) -> String {
-    let mut senate: VecDeque<_> = senate.chars().collect();
+    let mut senate = senate;
 
     loop {
         let mut r = 0;
@@ -10,14 +8,14 @@ pub fn predict_party_victory(senate: String) -> String {
         let current_senate = senate.clone();
         senate.clear();
 
-        for senator in current_senate {
+        for senator in current_senate.chars() {
             match senator {
                 'R' => {
                     if d > 0 {
                         d -= 1;
                     } else {
                         r += 1;
-                        senate.push_back(senator);
+                        senate.push(senator);
                     }
                 }
                 'D' => {
@@ -25,34 +23,37 @@ pub fn predict_party_victory(senate: String) -> String {
                         r -= 1;
                     } else {
                         d += 1;
-                        senate.push_back(senator);
+                        senate.push(senator);
                     }
                 }
                 _ => panic!(),
             }
         }
 
-        while r > 0 || d > 0 {
-            match senate.pop_front() {
-                Some('R') => {
+        let current_senate = senate.clone();
+        senate.clear();
+
+        for senator in current_senate.chars() {
+            match senator {
+                'R' => {
                     if d > 0 {
                         d -= 1;
                     } else {
-                        senate.push_front('R');
+                        senate.push(senator);
                     }
                 }
-                Some('D') => {
+                'D' => {
                     if r > 0 {
                         r -= 1;
                     } else {
-                        senate.push_front('R');
+                        senate.push(senator);
                     }
                 }
-                _ => break,
+                _ => panic!(),
             }
         }
 
-        match senate.iter().filter(|&&senator| senator == 'R').count() {
+        match senate.chars().filter(|&senator| senator == 'R').count() {
             r if r == senate.len() => return String::from("Radiant"),
             0 => return String::from("Dire"),
             _ => (),
@@ -83,5 +84,10 @@ mod tests {
             predict_party_victory("DRDRR".to_string()),
             "Dire".to_string()
         )
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(predict_party_victory("D".to_string()), "Dire".to_string())
     }
 }
