@@ -15,12 +15,12 @@ pub fn odd_even_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut odd = head.as_mut()?;
 
     let mut even_head;
-    if let Some(node) = odd.next.take() {
-        even_head = node;
+    if odd.next.is_some() {
+        even_head = odd.next.take();
     } else {
         return head;
     }
-    let mut even = &mut even_head;
+    let mut even = even_head.as_mut().unwrap();
 
     let mut current = even.next.take();
     let mut is_odd = true;
@@ -39,7 +39,7 @@ pub fn odd_even_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         }
     }
 
-    odd.next = Some(even_head);
+    odd.next = even_head;
 
     head
 }
