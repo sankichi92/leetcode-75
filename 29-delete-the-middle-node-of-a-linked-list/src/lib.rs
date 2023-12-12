@@ -21,6 +21,10 @@ pub fn delete_middle(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
         current = boxed_node.next.as_ref();
     }
 
+    if size == 1 {
+        return None;
+    }
+
     let middle = size / 2;
     let mut current = head.as_mut().unwrap();
 
@@ -109,5 +113,10 @@ mod tests {
             }))),
             Some(Box::new(ListNode::new(2)))
         )
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(delete_middle(Some(Box::new(ListNode::new(1)))), None)
     }
 }
