@@ -9,11 +9,11 @@ pub fn reverse_list(mut head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     }
 
     let mut head = stack.pop();
-    let mut current = head.as_mut().unwrap().as_mut();
+    let mut current = head.as_mut().unwrap();
     
     while !stack.is_empty() {
         current.next = stack.pop();
-        current = current.next.as_mut().unwrap().as_mut();
+        current = current.next.as_mut().unwrap();
     }
 
     head
