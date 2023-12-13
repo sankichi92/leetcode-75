@@ -32,4 +32,5 @@ members = [
   "29-delete-the-middle-node-of-a-linked-list",
   "30-odd-even-linked-list",
   "31-reverse-linked-list",
+  "32-maximum-twin-sum-of-a-linked-list",
 ]
