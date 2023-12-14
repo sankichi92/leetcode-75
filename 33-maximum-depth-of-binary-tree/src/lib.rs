@@ -10,7 +10,7 @@ pub fn max_depth(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
 }
 
 fn get_depth(node: &Rc<RefCell<TreeNode>>, depth: i32) -> i32 {
-    let node = node.as_ref().borrow();
+    let node = node.borrow();
     match (&node.left, &node.right) {
         (Some(left), Some(right)) => get_depth(left, depth + 1).max(get_depth(right, depth + 1)),
         (Some(left), None) => get_depth(left, depth + 1),
