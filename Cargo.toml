@@ -33,4 +33,5 @@ members = [
   "30-odd-even-linked-list",
   "31-reverse-linked-list",
   "32-maximum-twin-sum-of-a-linked-list",
+  "33-maximum-depth-of-binary-tree",
 ]
