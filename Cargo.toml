@@ -36,4 +36,5 @@ members = [
   "33-maximum-depth-of-binary-tree",
   "34-leaf-similar-trees",
   "35-count-good-nodes-in-binary-tree",
+  "36-path-sum-iii",
 ]
