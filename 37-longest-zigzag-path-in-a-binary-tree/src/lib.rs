@@ -3,27 +3,35 @@ use std::cmp;
 use std::rc::Rc;
 
 pub fn longest_zig_zag(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-    let mut stack = Vec::new();
-    stack_tree(&root, &mut stack);
+    let mut stack = vec![(Rc::clone(root.as_ref().unwrap()), true)];
+    stack_tree(&root, false, &mut stack);
 
     let mut longest = 0;
-    while let Some(node) = stack.pop() {
+    while let Some((node, parent_is_left)) = stack.pop() {
         let node = node.borrow();
         longest = cmp::max(
             longest,
-            cmp::max(zig_zag(&node.left, true, 0), zig_zag(&node.right, false, 0)),
+            if parent_is_left {
+                zig_zag(&node.left, true, 0)
+            } else {
+                zig_zag(&node.right, false, 0)
+            },
         )
     }
 
     longest
 }
 
-fn stack_tree(node: &Option<Rc<RefCell<TreeNode>>>, stack: &mut Vec<Rc<RefCell<TreeNode>>>) {
+fn stack_tree(
+    node: &Option<Rc<RefCell<TreeNode>>>,
+    parent_is_left: bool,
+    stack: &mut Vec<(Rc<RefCell<TreeNode>>, bool)>,
+) {
     if let Some(node) = node {
-        stack.push(Rc::clone(node));
+        stack.push((Rc::clone(node), parent_is_left));
         let node = node.borrow();
-        stack_tree(&node.left, stack);
-        stack_tree(&node.right, stack);
+        stack_tree(&node.left, true, stack);
+        stack_tree(&node.right, false, stack);
     }
 }
 
