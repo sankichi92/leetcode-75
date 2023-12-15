@@ -13,12 +13,12 @@ fn inner_path_sum(
 ) -> i32 {
     if let Some(node) = node {
         let node = node.borrow();
-        let mut sum = node.val;
-        let mut results = if sum == target_sum { 1 } else { 0 };
+        let mut sum: i64 = node.val as i64;
+        let mut results = if sum == target_sum as i64 { 1 } else { 0 };
 
         for parent in parents.iter() {
-            sum += parent;
-            if sum == target_sum {
+            sum += *parent as i64;
+            if sum == target_sum as i64 {
                 results += 1
             }
         }
@@ -114,6 +114,37 @@ mod tests {
                 22
             ),
             3
+        )
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(
+            path_sum(
+                Some(Rc::new(RefCell::new(TreeNode {
+                    val: 1000000000,
+                    left: Some(Rc::new(RefCell::new(TreeNode {
+                        val: 1000000000,
+                        left: Some(Rc::new(RefCell::new(TreeNode {
+                            val: 294967296,
+                            left: Some(Rc::new(RefCell::new(TreeNode {
+                                val: 1000000000,
+                                left: Some(Rc::new(RefCell::new(TreeNode {
+                                    val: 1000000000,
+                                    left: Some(Rc::new(RefCell::new(TreeNode::new(1000000000)))),
+                                    right: None,
+                                }))),
+                                right: None,
+                            }))),
+                            right: None,
+                        }))),
+                        right: None,
+                    }))),
+                    right: None,
+                }))),
+                0
+            ),
+            0
         )
     }
 }
