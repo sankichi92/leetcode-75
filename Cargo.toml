@@ -38,4 +38,5 @@ members = [
   "35-count-good-nodes-in-binary-tree",
   "36-path-sum-iii",
   "37-longest-zigzag-path-in-a-binary-tree",
+  "38-lowest-common-ancestor-of-a-binary-tree",
 ]
