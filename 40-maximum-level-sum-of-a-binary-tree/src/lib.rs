@@ -24,6 +24,7 @@ pub fn max_level_sum(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
     level_sums
         .iter()
         .enumerate()
+        .rev()
         .max_by(|(_, sum1), (_, sum2)| sum1.cmp(sum2))
         .unwrap()
         .0 as i32
@@ -84,6 +85,26 @@ mod tests {
                 }))),
             })))),
             2
+        )
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(
+            max_level_sum(Some(Rc::new(RefCell::new(TreeNode {
+                val: 1,
+                left: Some(Rc::new(RefCell::new(TreeNode {
+                    val: 1,
+                    left: Some(Rc::new(RefCell::new(TreeNode::new(7)))),
+                    right: Some(Rc::new(RefCell::new(TreeNode::new(-8)))),
+                }))),
+                right: Some(Rc::new(RefCell::new(TreeNode {
+                    val: 0,
+                    left: Some(Rc::new(RefCell::new(TreeNode::new(-7)))),
+                    right: Some(Rc::new(RefCell::new(TreeNode::new(9)))),
+                }))),
+            })))),
+            1
         )
     }
 }
