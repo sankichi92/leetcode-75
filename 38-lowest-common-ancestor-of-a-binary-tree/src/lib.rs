@@ -18,7 +18,7 @@ pub fn lowest_common_ancestor(
         if !p_ancestors.is_empty() && !q_ancestors.is_empty() {
             break;
         }
-        
+
         ancestors.push(Rc::clone(&node));
 
         if p_ancestors.is_empty() && node == p {
