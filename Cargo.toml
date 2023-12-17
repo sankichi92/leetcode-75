@@ -42,4 +42,5 @@ members = [
   "39-binary-tree-right-side-view",
   "40-maximum-level-sum-of-a-binary-tree",
   "41-search-in-a-binary-search-tree",
+  "42-delete-node-in-a-bst",
 ]
