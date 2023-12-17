@@ -6,7 +6,7 @@ pub fn search_bst(root: Option<Rc<RefCell<TreeNode>>>, val: i32) -> Option<Rc<Re
 
     while let Some(node) = stack.pop() {
         if node.borrow().val == val {
-            return Some(node)
+            return Some(node);
         }
 
         let node = node.borrow();
