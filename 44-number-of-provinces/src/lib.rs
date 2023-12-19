@@ -10,15 +10,23 @@ pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
             .filter(|(_, &val)| val == 1)
             .map(|(j, _)| j)
             .collect();
-        
-        let province = *connected_cities
+
+        let provinces: Vec<_> = connected_cities
             .iter()
-            .filter_map(|city| city_to_province.get(city))
-            .min()
-            .unwrap_or(&i);
-        
+            .map(|city| *city_to_province.get(city).unwrap_or(&i))
+            .collect();
+        let integrated_province = *provinces.iter().min().unwrap();
+
+        if provinces.len() > 1 {
+            for (_, p) in city_to_province.iter_mut() {
+                if provinces.contains(p) {
+                    *p = integrated_province
+                }
+            }
+        }
+
         for city in connected_cities {
-            city_to_province.insert(city, province);
+            city_to_province.insert(city, integrated_province);
         }
     }
 
@@ -56,6 +64,30 @@ mod tests {
                 vec![1, 0, 1, 1]
             ]),
             1
+        );
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(
+            find_circle_num(vec![
+                vec![1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+                vec![1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                vec![0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                vec![0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+                vec![0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0],
+                vec![0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+                vec![0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
+                vec![1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+                vec![0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0],
+                vec![0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+                vec![0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+                vec![0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+                vec![0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+                vec![0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0],
+                vec![0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1],
+            ]),
+            3
         );
     }
 }
