@@ -44,4 +44,5 @@ members = [
   "41-search-in-a-binary-search-tree",
   "42-delete-node-in-a-bst",
   "43-keys-and-rooms",
+  "44-number-of-provinces",
 ]
