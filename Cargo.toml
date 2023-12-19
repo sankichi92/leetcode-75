@@ -43,4 +43,5 @@ members = [
   "40-maximum-level-sum-of-a-binary-tree",
   "41-search-in-a-binary-search-tree",
   "42-delete-node-in-a-bst",
+  "43-keys-and-rooms",
 ]
