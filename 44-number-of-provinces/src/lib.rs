@@ -13,9 +13,9 @@ pub fn find_circle_num(is_connected: Vec<Vec<i32>>) -> i32 {
 
         let provinces: Vec<_> = connected_cities
             .iter()
-            .map(|city| *city_to_province.get(city).unwrap_or(&i))
+            .filter_map(|city| city_to_province.get(city).copied())
             .collect();
-        let integrated_province = *provinces.iter().min().unwrap();
+        let integrated_province = *provinces.iter().min().unwrap_or(&i);
 
         if provinces.len() > 1 {
             for (_, p) in city_to_province.iter_mut() {
