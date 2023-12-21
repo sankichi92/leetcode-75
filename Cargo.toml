@@ -45,4 +45,5 @@ members = [
   "42-delete-node-in-a-bst",
   "43-keys-and-rooms",
   "44-number-of-provinces",
+  "45-reorder-routes-to-make-all-paths-lead-to-the-city-zero",
 ]
