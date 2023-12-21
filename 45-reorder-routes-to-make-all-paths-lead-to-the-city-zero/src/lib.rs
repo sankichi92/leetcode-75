@@ -1,27 +1,24 @@
-use std::collections::HashSet;
-
-pub fn min_reorder(_n: i32, mut connections: Vec<Vec<i32>>) -> i32 {
+pub fn min_reorder(n: i32, mut connections: Vec<Vec<i32>>) -> i32 {
     let mut results = 0;
-    let mut stack = vec![HashSet::from([0])];
+    let mut connected = vec![false; n as usize];
+    connected[0] = true;
 
-    while let Some(targets) = stack.pop() {
-        let mut next_targets = HashSet::new();
-        
+    loop {
         connections.retain(|conn| {
-            if targets.contains(&conn[0]) {
+            if connected[conn[0] as usize] {
                 results += 1;
-                next_targets.insert(conn[1]);
+                connected[conn[1] as usize] = true;
                 false
-            } else if targets.contains(&conn[1]) {
-                next_targets.insert(conn[0]);
+            } else if connected[conn[1] as usize] {
+                connected[conn[0] as usize] = true;
                 false
             } else {
                 true
             }
         });
-        
-        if !next_targets.is_empty() {
-            stack.push(next_targets);
+
+        if connections.is_empty() {
+            break;
         }
     }
 
