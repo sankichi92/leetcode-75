@@ -1,20 +1,26 @@
 pub fn min_reorder(_n: i32, mut connections: Vec<Vec<i32>>) -> i32 {
     let mut results = 0;
-    let mut stack = vec![0];
+    let mut stack = vec![vec![0]];
 
-    while let Some(target) = stack.pop() {
+    while let Some(targets) = stack.pop() {
+        let mut next_targets = Vec::new();
+        
         connections.retain(|conn| {
-            if conn[0] == target {
+            if targets.contains(&conn[0]) {
                 results += 1;
-                stack.push(conn[1]);
+                next_targets.push(conn[1]);
                 false
-            } else if conn[1] == target {
-                stack.push(conn[0]);
+            } else if targets.contains(&conn[1]) {
+                next_targets.push(conn[0]);
                 false
             } else {
                 true
             }
         });
+        
+        if !next_targets.is_empty() {
+            stack.push(next_targets);
+        }
     }
 
     results
