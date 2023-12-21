@@ -3,7 +3,7 @@ pub fn min_reorder(n: i32, mut connections: Vec<Vec<i32>>) -> i32 {
     let mut connected = vec![false; n as usize];
     connected[0] = true;
 
-    loop {
+    while !connections.is_empty() {
         connections.retain(|conn| {
             if connected[conn[0] as usize] {
                 results += 1;
@@ -16,10 +16,6 @@ pub fn min_reorder(n: i32, mut connections: Vec<Vec<i32>>) -> i32 {
                 true
             }
         });
-
-        if connections.is_empty() {
-            break;
-        }
     }
 
     results
