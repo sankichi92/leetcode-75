@@ -10,19 +10,19 @@ pub fn nearest_exit(maze: Vec<Vec<char>>, entrance: Vec<i32>) -> i32 {
 
     let mut queue = VecDeque::new();
     if entrance[0] > 0 {
-        queue.push_back(([entrance[0] - 1, entrance[1]], 1));
+        queue.push_back((entrance[0] - 1, entrance[1], 1));
     }
     if entrance[0] < bottom_exit {
-        queue.push_back(([entrance[0] + 1, entrance[1]], 1));
+        queue.push_back((entrance[0] + 1, entrance[1], 1));
     }
     if entrance[1] > 0 {
-        queue.push_back(([entrance[0], entrance[1] - 1], 1));
+        queue.push_back((entrance[0], entrance[1] - 1, 1));
     }
     if entrance[1] < right_exit {
-        queue.push_back(([entrance[0], entrance[1] + 1], 1));
+        queue.push_back((entrance[0], entrance[1] + 1, 1));
     }
 
-    while let Some(([i, j], step)) = queue.pop_front() {
+    while let Some((i, j, step)) = queue.pop_front() {
         if visited[i][j] {
             continue;
         }
@@ -38,10 +38,10 @@ pub fn nearest_exit(maze: Vec<Vec<char>>, entrance: Vec<i32>) -> i32 {
         }
 
         let step = step + 1;
-        queue.push_back(([i - 1, j], step));
-        queue.push_back(([i + 1, j], step));
-        queue.push_back(([i, j - 1], step));
-        queue.push_back(([i, j + 1], step));
+        queue.push_back((i - 1, j, step));
+        queue.push_back((i + 1, j, step));
+        queue.push_back((i, j - 1, step));
+        queue.push_back((i, j + 1, step));
     }
 
     -1
