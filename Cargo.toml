@@ -48,4 +48,5 @@ members = [
   "45-reorder-routes-to-make-all-paths-lead-to-the-city-zero",
   "46-evaluate-division",
   "47-nearest-exit-from-entrance-in-maze",
+  "48-rotting-oranges",
 ]
