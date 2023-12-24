@@ -1,6 +1,7 @@
-use std::{collections::{BinaryHeap, HashSet}, cmp::Reverse};
-
-const DEFAULTS: [i32; 5] = [1, 2, 3, 4, 5];
+use std::{
+    cmp::Reverse,
+    collections::{BinaryHeap, HashSet},
+};
 
 pub struct SmallestInfiniteSet {
     set: HashSet<i32>,
@@ -11,8 +12,8 @@ impl SmallestInfiniteSet {
     #[allow(clippy::new_without_default)]
     pub fn new() -> Self {
         SmallestInfiniteSet {
-            set: HashSet::from(DEFAULTS),
-            heap: DEFAULTS.into_iter().map(Reverse).collect(),
+            set: (1..=1000).collect(),
+            heap: (1..=1000).map(Reverse).collect(),
         }
     }
 
@@ -44,5 +45,19 @@ mod tests {
         assert_eq!(set.pop_smallest(), 1);
         assert_eq!(set.pop_smallest(), 4);
         assert_eq!(set.pop_smallest(), 5);
+    }
+
+    #[test]
+    fn failed_case1() {
+        let mut set = SmallestInfiniteSet::new();
+        assert_eq!(set.pop_smallest(), 1);
+        set.add_back(607);
+        assert_eq!(set.pop_smallest(), 2);
+        set.add_back(781);
+        assert_eq!(set.pop_smallest(), 3);
+        set.add_back(562);
+        assert_eq!(set.pop_smallest(), 4);
+        assert_eq!(set.pop_smallest(), 5);
+        assert_eq!(set.pop_smallest(), 6);
     }
 }
