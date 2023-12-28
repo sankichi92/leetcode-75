@@ -16,15 +16,15 @@ pub fn max_score(nums1: Vec<i32>, nums2: Vec<i32>, k: i32) -> i64 {
         .take(k)
         .map(|&i| Reverse(nums1[i]))
         .collect();
-    let mut nums1_sum: i32 = nums1_heap.iter().map(|num| num.0).sum();
-    let mut max_score = nums1_sum as i64 * nums2[sorted_indices[k - 1]] as i64;
+    let mut nums1_sum: i64 = nums1_heap.iter().map(|num| num.0 as i64).sum();
+    let mut max_score = nums1_sum * nums2[sorted_indices[k - 1]] as i64;
 
     for &i in sorted_indices.iter().skip(k) {
         let (num1, num2) = (nums1[i], nums2[i]);
         nums1_heap.push(Reverse(num1));
         let min_num1 = nums1_heap.pop().unwrap().0;
-        nums1_sum = nums1_sum - min_num1 + num1;
-        max_score = max_score.max(nums1_sum as i64 * num2 as i64);
+        nums1_sum -= (min_num1 - num1) as i64;
+        max_score = max_score.max(nums1_sum * num2 as i64);
     }
 
     max_score
