@@ -51,4 +51,5 @@ members = [
   "48-rotting-oranges",
   "49-kth-largest-element-in-an-array",
   "50-smallest-number-in-infinite-set",
+  "51-maximum-subsequence-score",
 ]
