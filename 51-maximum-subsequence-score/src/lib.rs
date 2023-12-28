@@ -1,86 +1,39 @@
 use std::{
-    cmp::{Ord, Ordering},
-    collections::{BinaryHeap, HashSet},
+    cmp::{Ordering, Reverse},
+    collections::BinaryHeap,
 };
 
 pub fn max_score(nums1: Vec<i32>, nums2: Vec<i32>, k: i32) -> i64 {
     let k = k as usize;
-    let mut heap1: BinaryHeap<_> = nums1
-        .iter()
-        .enumerate()
-        .take(k)
-        .map(|(i, &val)| ValAndIdx(val, i))
-        .collect();
-    let mut heap2: BinaryHeap<_> = nums2
-        .iter()
-        .enumerate()
-        .take(k)
-        .map(|(i, &val)| ValAndIdx(val, i))
-        .collect();
-    let mut nums1_sum: i32 = nums1.iter().take(k).sum();
-    let mut max_score = nums1_sum as i64 * heap2.peek().unwrap().0 as i64;
-    let mut max_score_indices: HashSet<_> = (0..k).collect();
+    let mut sorted_indices: Vec<_> = (0..nums1.len()).collect();
+    sorted_indices.sort_unstable_by(|&a, &b| match nums2[b].cmp(&nums2[a]) {
+        Ordering::Equal => nums1[b].cmp(&nums1[a]),
+        res => res,
+    });
 
-    for i in k..nums1.len() {
+    let mut nums1_heap: BinaryHeap<_> = sorted_indices
+        .iter()
+        .take(k)
+        .map(|&i| Reverse(nums1[i]))
+        .collect();
+    let mut nums1_sum: i32 = nums1_heap.iter().map(|num| num.0).sum();
+    let mut max_score = nums1_sum as i64 * nums2[sorted_indices[k - 1]] as i64;
+
+    for &i in sorted_indices.iter().skip(k) {
         let (num1, num2) = (nums1[i], nums2[i]);
+        let mut min_num1_rev = nums1_heap.peek_mut().unwrap();
+        let new_nums1_sum = nums1_sum - min_num1_rev.0 + num1;
+        let new_score = new_nums1_sum as i64 * num2 as i64;
 
-        let val_and_idx1 = heap1.peek().unwrap();
-        let val_and_idx2 = heap2.pop().unwrap();
-
-        let score1 = (nums1_sum - val_and_idx1.0 + num1) as i64 * num2.min(val_and_idx2.0) as i64;
-        let score2 = (nums1_sum - nums1[val_and_idx2.1] + num1) as i64
-            * num2.min(heap2.peek().unwrap_or(&ValAndIdx(num2, i)).0) as i64;
-
-        if score1 > max_score && score1 >= score2 {
-            max_score = score1;
-            nums1_sum = nums1_sum - val_and_idx1.0 + num1;
-            max_score_indices.remove(&val_and_idx1.1);
-            max_score_indices.insert(i);
-            heap2 = max_score_indices
-                .iter()
-                .map(|&i| ValAndIdx(nums2[i], i))
-                .collect();
-            heap1.pop();
-            heap1.push(ValAndIdx(num1, i));
-        } else if (score2 > max_score && score2 >= score1) || (max_score == 0 && num2 != 0) {
-            max_score = score2;
-            nums1_sum = nums1_sum - nums1[val_and_idx2.1] + num1;
-            max_score_indices.remove(&val_and_idx2.1);
-            max_score_indices.insert(i);
-            heap1 = max_score_indices
-                .iter()
-                .map(|&i| ValAndIdx(nums1[i], i))
-                .collect();
-            heap2.push(ValAndIdx(num2, i));
-        } else {
-            heap2.push(val_and_idx2);
+        if new_score > max_score {
+            min_num1_rev.0 = num1;
+            nums1_sum = new_nums1_sum;
+            max_score = new_score;
         }
     }
 
     max_score
 }
-
-struct ValAndIdx(i32, usize);
-
-impl Ord for ValAndIdx {
-    fn cmp(&self, other: &Self) -> Ordering {
-        other.0.cmp(&self.0)
-    }
-}
-
-impl PartialOrd for ValAndIdx {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
-impl PartialEq for ValAndIdx {
-    fn eq(&self, other: &Self) -> bool {
-        self.0 == other.0
-    }
-}
-
-impl Eq for ValAndIdx {}
 
 #[cfg(test)]
 mod tests {
@@ -106,21 +59,24 @@ mod tests {
 
     #[test]
     fn failed_case2() {
-        max_score(
-            vec![
-                93, 463, 179, 2488, 619, 2006, 1561, 137, 53, 1765, 2304, 1459, 1768, 450, 1938,
-                2054, 466, 331, 670, 1830, 1550, 1534, 2164, 1280, 2277, 2312, 1509, 867, 2223,
-                1482, 2379, 1032, 359, 1746, 966, 232, 67, 1203, 2474, 944, 1740, 1775, 1799, 1156,
-                1982, 1416, 511, 1167, 1334, 2344,
-            ],
-            vec![
-                345, 229, 976, 2086, 567, 726, 1640, 2451, 1829, 77, 1631, 306, 2032, 2497, 551,
-                2005, 2009, 1855, 1685, 729, 2498, 2204, 588, 474, 693, 30, 2051, 1126, 1293, 1378,
-                1693, 1995, 2188, 1284, 1414, 1618, 2005, 1005, 1890, 30, 895, 155, 526, 682, 2454,
-                278, 999, 1417, 1682, 995,
-            ],
-            42,
-        );
+        assert_eq!(
+            max_score(
+                vec![
+                    93, 463, 179, 2488, 619, 2006, 1561, 137, 53, 1765, 2304, 1459, 1768, 450,
+                    1938, 2054, 466, 331, 670, 1830, 1550, 1534, 2164, 1280, 2277, 2312, 1509, 867,
+                    2223, 1482, 2379, 1032, 359, 1746, 966, 232, 67, 1203, 2474, 944, 1740, 1775,
+                    1799, 1156, 1982, 1416, 511, 1167, 1334, 2344,
+                ],
+                vec![
+                    345, 229, 976, 2086, 567, 726, 1640, 2451, 1829, 77, 1631, 306, 2032, 2497,
+                    551, 2005, 2009, 1855, 1685, 729, 2498, 2204, 588, 474, 693, 30, 2051, 1126,
+                    1293, 1378, 1693, 1995, 2188, 1284, 1414, 1618, 2005, 1005, 1890, 30, 895, 155,
+                    526, 682, 2454, 278, 999, 1417, 1682, 995,
+                ],
+                42,
+            ),
+            26653494
+        )
     }
 
     #[test]
