@@ -52,4 +52,5 @@ members = [
   "49-kth-largest-element-in-an-array",
   "50-smallest-number-in-infinite-set",
   "51-maximum-subsequence-score",
+  "52-total-cost-to-hire-k-workers",
 ]
