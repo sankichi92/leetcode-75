@@ -42,7 +42,7 @@ pub fn max_score(nums1: Vec<i32>, nums2: Vec<i32>, k: i32) -> i64 {
                 .collect();
             heap1.pop();
             heap1.push(ValAndIdx(num1, i));
-        } else if score2 > max_score && score2 >= score1 {
+        } else if (score2 > max_score && score2 >= score1) || (max_score == 0 && num2 != 0) {
             max_score = score2;
             nums1_sum = nums1_sum - nums1[val_and_idx2.1] + num1;
             max_score_indices.remove(&val_and_idx2.1);
@@ -126,5 +126,17 @@ mod tests {
     #[test]
     fn failed_case3() {
         assert_eq!(max_score(vec![2, 1, 14, 12], vec![11, 7, 13, 6], 3), 168)
+    }
+
+    #[test]
+    fn failed_case4() {
+        assert_eq!(
+            max_score(
+                vec![79, 76, 41, 28, 41, 66, 44, 30, 25],
+                vec![25, 0, 69, 67, 55, 0, 9, 77, 26],
+                7
+            ),
+            2592
+        )
     }
 }
