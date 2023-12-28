@@ -16,9 +16,10 @@ pub fn total_cost(mut costs: Vec<i32>, k: i32, candidates: i32) -> i64 {
         .collect();
 
     for _ in 0..k {
-        if left_candidates.peek().unwrap().0
-            <= right_candidates.peek().unwrap_or(&Reverse(i32::MAX)).0
-        {
+        let left_min = left_candidates.peek().unwrap_or(&Reverse(i32::MAX)).0;
+        let right_min = right_candidates.peek().unwrap_or(&Reverse(i32::MAX)).0;
+
+        if left_min <= right_min {
             total_cost += left_candidates.pop().unwrap().0 as i64;
 
             if costs.len() > candidates * 2 {
@@ -48,5 +49,10 @@ mod tests {
     #[test]
     fn case2() {
         assert_eq!(total_cost(vec![1, 2, 4, 1], 3, 3), 4);
+    }
+
+    #[test]
+    fn failed_case1() {
+        total_cost(vec![57, 33, 26, 76, 14, 67, 24, 90, 72, 37, 30], 11, 2);
     }
 }
