@@ -60,4 +60,5 @@ members = [
   "57-letter-combinations-of-a-phone-number",
   "58-combination-sum-iii",
   "59-n-th-tribonacci-number",
+  "60-min-cost-climbing-stairs",
 ]
