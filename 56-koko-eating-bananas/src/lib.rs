@@ -1,7 +1,5 @@
-pub fn min_eating_speed(mut piles: Vec<i32>, h: i32) -> i32 {
-    piles.sort_unstable();
-
-    let (mut left, mut right) = (1, *piles.last().unwrap());
+pub fn min_eating_speed(piles: Vec<i32>, h: i32) -> i32 {
+    let (mut left, mut right) = (1, *piles.iter().max().unwrap());
     'bsearch: loop {
         let mid = left + (right - left) / 2;
 
