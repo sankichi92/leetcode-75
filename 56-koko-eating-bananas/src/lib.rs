@@ -1,10 +1,28 @@
 pub fn min_eating_speed(mut piles: Vec<i32>, h: i32) -> i32 {
     piles.sort_unstable();
-    let candidates: Vec<_> = (1..*piles.last().unwrap()).collect();
-    candidates.partition_point(|candidate| {
-        let hours: i32 = piles.iter().map(|pile| (*pile as f64 / *candidate as f64).ceil() as i32).sum();
-        hours > h
-    }) as i32 + 1
+
+    let (mut left, mut right) = (1, *piles.last().unwrap());
+    'bsearch: loop {
+        let mid = left + (right - left) / 2;
+
+        let mut hours = 0;
+        for pile in piles.iter() {
+            hours += (*pile as f64 / mid as f64).ceil() as i32;
+            if hours > h {
+                left = mid + 1;
+                continue 'bsearch;
+            }
+        }
+        
+        let mut hours = 0;
+        for pile in piles.iter() {
+            hours += (*pile as f64 / (mid - 1) as f64).ceil() as i32;
+            if hours > h {
+                return mid;
+            }
+        }
+        right = mid - 1;
+    }
 }
 
 #[cfg(test)]
@@ -24,5 +42,10 @@ mod tests {
     #[test]
     fn case3() {
         assert_eq!(min_eating_speed(vec![30, 11, 23, 4, 20], 6), 23)
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(min_eating_speed(vec![312884470], 312884470), 1)
     }
 }
