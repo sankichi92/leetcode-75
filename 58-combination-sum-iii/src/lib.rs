@@ -8,7 +8,7 @@ pub fn combination_sum3(k: i32, n: i32) -> Vec<Vec<i32>> {
         }
 
         for i in (0..k).rev() {
-            if candidate[i as usize] < 9 + k - 1 - i {
+            if candidate[i as usize] < 9 + i - (k - 1) {
                 candidate[i as usize] += 1;
                 for j in i + 1..k {
                     candidate[j as usize] = candidate[i as usize] + j - i;
@@ -60,5 +60,10 @@ mod tests {
                 vec![4, 5, 6]
             ]
         );
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(combination_sum3(3, 28), Vec::<Vec<i32>>::new());
     }
 }
