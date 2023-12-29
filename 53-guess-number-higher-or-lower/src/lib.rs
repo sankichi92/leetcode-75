@@ -1,6 +1,6 @@
-#[allow(non_snake_case,clippy::missing_safety_doc)]
+#[allow(non_snake_case, clippy::missing_safety_doc)]
 pub unsafe fn guessNumber(n: i32) -> i32 {
-    bsearch( 1, n)
+    bsearch(1, n)
 }
 
 unsafe fn bsearch(min: i32, max: i32) -> i32 {
@@ -8,7 +8,7 @@ unsafe fn bsearch(min: i32, max: i32) -> i32 {
     match guess(current) {
         -1 => bsearch(min, current - 1),
         0 => current,
-        1 => bsearch( current + 1, max),
+        1 => bsearch(current + 1, max),
         _ => panic!(),
     }
 }
