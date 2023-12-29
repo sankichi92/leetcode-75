@@ -11,7 +11,7 @@ pub fn min_eating_speed(piles: Vec<i32>, h: i32) -> i32 {
                 continue 'bsearch;
             }
         }
-        
+
         let mut hours = 0;
         for pile in piles.iter() {
             hours += (*pile as f64 / (mid - 1) as f64).ceil() as i32;
