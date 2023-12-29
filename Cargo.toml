@@ -58,4 +58,5 @@ members = [
   "55-find-peak-element",
   "56-koko-eating-bananas",
   "57-letter-combinations-of-a-phone-number",
+  "58-combination-sum-iii",
 ]
