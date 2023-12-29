@@ -3,7 +3,8 @@ pub fn tribonacci(n: i32) -> i32 {
         0 => 0,
         1 => 1,
         2 => 1,
-        _ => tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3)
+        3 => 2,
+        _ => 2 * tribonacci(n - 1) - tribonacci(n - 4),
     }
 }
 
@@ -19,5 +20,10 @@ mod tests {
     #[test]
     fn case2() {
         assert_eq!(tribonacci(25), 1389537)
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(tribonacci(34), 334745777)
     }
 }
