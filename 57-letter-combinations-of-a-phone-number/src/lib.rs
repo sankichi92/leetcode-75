@@ -28,7 +28,6 @@ pub fn letter_combinations(digits: String) -> Vec<String> {
         .skip(1)
         .map(|char| digit_to_letters.get(&char).unwrap().clone())
         .fold(init, |results, letters| {
-            println!("{:?}, {:?}", results, letters);
             let mut new_results = vec![];
             for str in results {
                 for letter in letters.iter() {
