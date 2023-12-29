@@ -53,4 +53,5 @@ members = [
   "50-smallest-number-in-infinite-set",
   "51-maximum-subsequence-score",
   "52-total-cost-to-hire-k-workers",
+  "53-guess-number-higher-or-lower",
 ]
