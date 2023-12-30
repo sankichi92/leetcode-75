@@ -5,10 +5,9 @@ pub fn unique_paths(m: i32, n: i32) -> i32 {
     for i in 0..m {
         for j in 0..n {
             grid[i][j] = match (i, j) {
-                (0, 0) => 0,
                 (0, _) => 1,
                 (_, 0) => 1,
-                _ => grid[i - 1][j] + grid[i][j - 1]
+                _ => grid[i - 1][j] + grid[i][j - 1],
             }
         }
     }
@@ -28,5 +27,10 @@ mod tests {
     #[test]
     fn case2() {
         assert_eq!(unique_paths(3, 2), 3);
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(unique_paths(1, 1), 1);
     }
 }
