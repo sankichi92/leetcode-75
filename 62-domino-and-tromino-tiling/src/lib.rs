@@ -7,7 +7,7 @@ pub fn num_tilings(n: i32) -> i32 {
     tilings.push(5);
 
     for i in 3..n {
-        tilings.push(tilings[i - 1] + tilings[i - 2] + 2 * tilings[i - 3] + 2);
+        tilings.push(2 * tilings[i - 1] + tilings[i - 3]);
     }
 
     tilings[n - 1]
@@ -30,12 +30,10 @@ mod tests {
     #[test]
     fn failed_case1() {
         assert_eq!(num_tilings(4), 11);
-        // (1,1,1,1)
-        // (1,1,2)
-        // (1,2,1)
-        // (1,3) * 2
-        // (2,1,1)
-        // (2,2)
-        // (3,1) * 2
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(num_tilings(5), 24);
     }
 }
