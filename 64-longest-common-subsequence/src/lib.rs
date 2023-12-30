@@ -5,15 +5,17 @@ pub fn longest_common_subsequence(text1: String, text2: String) -> i32 {
         (text2, text1)
     };
 
-    let mut lengths = vec![0; shorter.len() + 1];
+    let mut lengths = vec![0; shorter.len()];
+    // println!("{:?}", shorter.chars().collect::<Vec<char>>());
 
     for current in longer.chars() {
         for (i, char) in shorter.chars().enumerate() {
             if current == char {
-                lengths[i + 1] = lengths[i + 1].max(lengths[i] + 1);
+                lengths[i] = lengths.iter().take(i).max().unwrap_or(&0) + 1;
                 break;
             }
         }
+        // println!("{}: {:?}", current, lengths)
     }
 
     *lengths.iter().max().unwrap()
@@ -44,6 +46,14 @@ mod tests {
         assert_eq!(
             longest_common_subsequence("abc".to_string(), "def".to_string()),
             0
+        )
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(
+            longest_common_subsequence("hofubmnylkra".to_string(), "pqhgxgdofcvmr".to_string()),
+            5
         )
     }
 }
