@@ -62,4 +62,5 @@ members = [
   "59-n-th-tribonacci-number",
   "60-min-cost-climbing-stairs",
   "61-house-robber",
+  "62-domino-and-tromino-tiling",
 ]
