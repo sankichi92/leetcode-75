@@ -64,4 +64,5 @@ members = [
   "61-house-robber",
   "62-domino-and-tromino-tiling",
   "63-unique-paths",
+  "64-longest-common-subsequence",
 ]
