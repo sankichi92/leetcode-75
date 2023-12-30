@@ -61,4 +61,5 @@ members = [
   "58-combination-sum-iii",
   "59-n-th-tribonacci-number",
   "60-min-cost-climbing-stairs",
+  "61-house-robber",
 ]
