@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub fn longest_common_subsequence(text1: String, text2: String) -> i32 {
     let (longer, shorter) = if text1.len() >= text2.len() {
         (text1, text2)
@@ -5,17 +7,20 @@ pub fn longest_common_subsequence(text1: String, text2: String) -> i32 {
         (text2, text1)
     };
 
+    let mut char_to_indices = HashMap::new();
+    for (i, char) in shorter.chars().enumerate() {
+        let entry = char_to_indices.entry(char).or_insert(vec![]);
+        entry.push(i)
+    }
+
     let mut lengths = vec![0; shorter.len()];
-    // println!("{:?}", shorter.chars().collect::<Vec<char>>());
 
     for current in longer.chars() {
-        for (i, char) in shorter.chars().enumerate() {
-            if current == char {
+        if let Some(indices) = char_to_indices.get(&current) {
+            for &i in indices.iter().rev() {
                 lengths[i] = lengths.iter().take(i).max().unwrap_or(&0) + 1;
-                break;
             }
         }
-        // println!("{}: {:?}", current, lengths)
     }
 
     *lengths.iter().max().unwrap()
@@ -53,6 +58,14 @@ mod tests {
     fn failed_case1() {
         assert_eq!(
             longest_common_subsequence("hofubmnylkra".to_string(), "pqhgxgdofcvmr".to_string()),
+            5
+        )
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(
+            longest_common_subsequence("abcba".to_string(), "abcbcba".to_string()),
             5
         )
     }
