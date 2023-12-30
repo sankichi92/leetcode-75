@@ -1,26 +1,15 @@
 use std::cmp;
 
 pub fn min_cost_climbing_stairs(cost: Vec<i32>) -> i32 {
-    cmp::min(
-        inner_min_cost_climbing_stairs(&cost, cost.len() - 1, cost[cost.len() - 1]),
-        inner_min_cost_climbing_stairs(&cost, cost.len() - 2, cost[cost.len() - 2]),
-    )
-}
+    let length = cost.len();
+    let mut next_costs = (cost[length - 2], cost[length - 1]);
 
-fn inner_min_cost_climbing_stairs(cost: &[i32], mut current: usize, mut sum: i32) -> i32 {
-    loop {
-        if current == 0 || current == 1 {
-            return sum;
-        }
-
-        if cost[current - 1] < cost[current - 2] {
-            sum += cost[current - 1];
-            current -= 1
-        } else {
-            sum += cost[current - 2];
-            current -= 2
-        }
+    for i in (0..length - 2).rev() {
+        let current_cost = cost[i] + cmp::min(next_costs.0, next_costs.1);
+        next_costs = (current_cost, next_costs.0);
     }
+
+    cmp::min(next_costs.0, next_costs.1)
 }
 
 #[cfg(test)]
@@ -106,5 +95,10 @@ mod tests {
             534, 956, 703, 434, 302, 541, 997, 214, 429, 961, 648, 774, 244, 684, 218, 49, 729,
             990, 521, 948, 317, 847, 76, 566, 415, 874, 399, 613, 816, 613, 467, 191,
         ]);
+    }
+
+    #[test]
+    fn failed_case3() {
+        assert_eq!(min_cost_climbing_stairs(vec![2, 2, 1, 0]), 2);
     }
 }
