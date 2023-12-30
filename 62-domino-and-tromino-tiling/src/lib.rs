@@ -1,3 +1,5 @@
+const MODULO: i64 = 1_000_000_007;
+
 pub fn num_tilings(n: i32) -> i32 {
     let n = n as usize;
 
@@ -7,7 +9,7 @@ pub fn num_tilings(n: i32) -> i32 {
     tilings.push(5);
 
     for i in 3..n {
-        tilings.push(2 * tilings[i - 1] + tilings[i - 3]);
+        tilings.push(((2 * tilings[i - 1] as i64 + tilings[i - 3] as i64) % MODULO) as i32);
     }
 
     tilings[n - 1]
@@ -35,5 +37,10 @@ mod tests {
     #[test]
     fn failed_case2() {
         assert_eq!(num_tilings(5), 24);
+    }
+
+    #[test]
+    fn failed_case3() {
+        assert_eq!(num_tilings(30), 312342182);
     }
 }
