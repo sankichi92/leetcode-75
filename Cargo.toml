@@ -68,4 +68,5 @@ members = [
   "65-best-time-to-buy-and-sell-stock-with-transaction-fee",
   "66-edit-distance",
   "67-counting-bits",
+  "68-single-number",
 ]
