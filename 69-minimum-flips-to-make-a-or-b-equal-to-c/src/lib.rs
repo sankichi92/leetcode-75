@@ -1,6 +1,5 @@
 pub fn min_flips(a: i32, b: i32, c: i32) -> i32 {
-    // println!("a: {a:b}, b: {b:b}, a|b: {:b}, c: {c:b}", a | b);
-    (((a | b) ^ c).count_ones() + (a & b).count_ones()) as i32
+    (((a | b) ^ c).count_ones() + (a & b & !c).count_ones()) as i32
 }
 
 #[cfg(test)]
@@ -20,5 +19,10 @@ mod tests {
     #[test]
     fn case3() {
         assert_eq!(min_flips(1, 2, 3), 0)
+    }
+
+    #[test]
+    fn failed_case1() {
+        assert_eq!(min_flips(7, 7, 7), 0)
     }
 }
