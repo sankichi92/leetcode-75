@@ -1,3 +1,19 @@
+//     r o s
+//   0 1 2 3
+// h 1 1 2 3
+// o 2 2 1 2
+// r 3 2 2 2
+// s 4 3 3 2
+// e 5 4 4 3
+
+//     r o s
+//   0 1 2 3
+// h 1 1 2 3
+// o 2 2 1 2
+// r 3 2 2 2
+// o 4 3 2 3
+// s 4 3 2 2
+
 pub fn min_distance(word1: String, word2: String) -> i32 {
     let (longer, shorter) = if word1.len() >= word2.len() {
         (word1, word2)
