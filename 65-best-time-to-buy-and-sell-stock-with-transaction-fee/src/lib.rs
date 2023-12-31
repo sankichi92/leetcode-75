@@ -6,29 +6,24 @@
 // 2 [_, _, _, 5, 5, 6]
 // 8 [_, _, _, _, 5, 6]
 // 4 [_, _, _, _, _, 8]
-use std::cmp;
-
 pub fn max_profit(prices: Vec<i32>, fee: i32) -> i32 {
     let days = prices.len();
 
-    let mut profit_matrix = vec![vec![0; days]; days];
+    let mut profits = vec![0; days];
 
     for (buy_day, buy_price) in prices.iter().enumerate().take(days - 1) {
-        let current_profit = profit_matrix[buy_day][buy_day];
+        let current_profit = profits[buy_day];
+        let mut new_profits = vec![0; days];
         for (sell_day, sell_price) in prices.iter().enumerate().skip(buy_day + 1) {
             let profit = current_profit + sell_price - buy_price - fee;
-            profit_matrix[buy_day + 1][sell_day] = cmp::max(
-                profit,
-                cmp::max(
-                    profit_matrix[buy_day + 1][sell_day - 1],
-                    profit_matrix[buy_day][sell_day],
-                ),
-            );
-            // println!("{:?}", profit_matrix);
+            new_profits[sell_day] = new_profits[sell_day - 1].max(profit);
+        }
+        for day in buy_day + 1..days {
+            profits[day] = profits[day].max(new_profits[day])
         }
     }
 
-    profit_matrix[days - 1][days - 1]
+    profits[days - 1]
 }
 
 #[cfg(test)]
