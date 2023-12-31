@@ -65,4 +65,5 @@ members = [
   "62-domino-and-tromino-tiling",
   "63-unique-paths",
   "64-longest-common-subsequence",
+  "65-best-time-to-buy-and-sell-stock-with-transaction-fee",
 ]
