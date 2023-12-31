@@ -1,5 +1,13 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+use std::collections::HashSet;
+
+pub fn single_number(nums: Vec<i32>) -> i32 {
+    let mut appeared_nums = HashSet::new();
+    for num in nums {
+        if !appeared_nums.remove(&num) {
+            appeared_nums.insert(num);
+        }
+    }
+    *appeared_nums.iter().next().unwrap()
 }
 
 #[cfg(test)]
@@ -7,8 +15,17 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn case1() {
+        assert_eq!(single_number(vec![2, 2, 1]), 1)
+    }
+
+    #[test]
+    fn case2() {
+        assert_eq!(single_number(vec![4, 1, 2, 1, 2]), 4)
+    }
+
+    #[test]
+    fn case3() {
+        assert_eq!(single_number(vec![1]), 1)
     }
 }
