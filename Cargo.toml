@@ -70,4 +70,5 @@ members = [
   "67-counting-bits",
   "68-single-number",
   "69-minimum-flips-to-make-a-or-b-equal-to-c",
+  "70-implement-trie-prefix-tree",
 ]
