@@ -69,4 +69,5 @@ members = [
   "66-edit-distance",
   "67-counting-bits",
   "68-single-number",
+  "69-minimum-flips-to-make-a-or-b-equal-to-c",
 ]
