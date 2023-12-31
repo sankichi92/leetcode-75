@@ -24,7 +24,7 @@ pub fn min_distance(word1: String, word2: String) -> i32 {
     if shorter.is_empty() {
         return longer.len() as i32;
     }
-    
+
     let mut distances: Vec<_> = (0..=shorter.len()).collect();
     let mut prev_distances = distances.clone();
 
