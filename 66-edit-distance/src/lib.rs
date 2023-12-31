@@ -4,6 +4,10 @@ pub fn min_distance(word1: String, word2: String) -> i32 {
     } else {
         (word2, word1)
     };
+
+    if shorter.is_empty() {
+        return longer.len() as i32;
+    }
     
     let mut distances: Vec<_> = (0..=shorter.len()).collect();
     let mut prev_distances = distances.clone();
@@ -45,5 +49,10 @@ mod tests {
     #[test]
     fn failed_case1() {
         assert_eq!(min_distance("a".to_string(), "ab".to_string()), 1);
+    }
+
+    #[test]
+    fn failed_case2() {
+        assert_eq!(min_distance("".to_string(), "a".to_string()), 1);
     }
 }
