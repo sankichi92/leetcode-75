@@ -1,5 +1,20 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub fn min_distance(mut word1: String, mut word2: String) -> i32 {
+    if word1.is_empty() && word2.is_empty() {
+        return 0;
+    }
+
+    let char1 = word1.pop();
+    let char2 = word2.pop();
+    match (char1, char2) {
+        (Some(char1), Some(char2)) => {
+            if char1 == char2 {
+                min_distance(word1, word2)
+            } else {
+                1 + min_distance(word1, word2)
+            }
+        }
+        _ => 1 + min_distance(word1, word2),
+    }
 }
 
 #[cfg(test)]
@@ -7,8 +22,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn case1() {
+        assert_eq!(min_distance("horse".to_string(), "ros".to_string()), 3);
+    }
+
+    #[test]
+    fn case2() {
+        assert_eq!(
+            min_distance("intention".to_string(), "execution".to_string()),
+            5
+        );
     }
 }
