@@ -1,10 +1,10 @@
 pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
     let mut results = vec![0; temperatures.len()];
-    
+
     let mut no_warmer_days = vec![(0, temperatures[0])];
 
     for (current_day, current_temperature) in temperatures.into_iter().enumerate().skip(1) {
-        while let Some((day, temperature)) = no_warmer_days.pop()  {
+        while let Some((day, temperature)) = no_warmer_days.pop() {
             if current_temperature > temperature {
                 results[day] = (current_day - day) as i32;
             } else {
