@@ -73,4 +73,5 @@ members = [
   "70-implement-trie-prefix-tree",
   "71-search-suggestions-system",
   "72-non-overlapping-intervals",
+  "73-minimum-number-of-arrows-to-burst-balloons",
 ]
