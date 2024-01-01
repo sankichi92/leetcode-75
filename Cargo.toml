@@ -75,4 +75,5 @@ members = [
   "72-non-overlapping-intervals",
   "73-minimum-number-of-arrows-to-burst-balloons",
   "74-daily-temperatures",
+  "75-online-stock-span",
 ]
